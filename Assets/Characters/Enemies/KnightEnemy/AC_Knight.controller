@@ -169,7 +169,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ca6064e949c939498d201d2d2824126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 0.5
+  fadeTime: 0.8
+  fadeDelay: 0.1
 --- !u!1101 &-4978731547018393512
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -466,11 +467,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c8699219f57f44391013b83e5cc83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boolName: canMove
+  boolName: 
   updateOnState: 0
-  updateOnStateMachine: 1
+  updateOnStateMachine: 0
   valueOnEnter: 0
-  valueOnExit: 1
+  valueOnExit: 0
 --- !u!1101 &3908290301517108302
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -505,11 +506,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c8699219f57f44391013b83e5cc83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boolName: canMove
+  boolName: 
   updateOnState: 0
-  updateOnStateMachine: 1
+  updateOnStateMachine: 0
   valueOnEnter: 0
-  valueOnExit: 1
+  valueOnExit: 0
 --- !u!1107 &4767636712485402306
 AnimatorStateMachine:
   serializedVersion: 6
@@ -547,11 +548,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73c8699219f57f44391013b83e5cc83e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boolName: canMove
-  updateOnState: 1
+  boolName: 
+  updateOnState: 0
   updateOnStateMachine: 0
   valueOnEnter: 0
-  valueOnExit: 1
+  valueOnExit: 0
 --- !u!1102 &6430646481734929445
 AnimatorState:
   serializedVersion: 6

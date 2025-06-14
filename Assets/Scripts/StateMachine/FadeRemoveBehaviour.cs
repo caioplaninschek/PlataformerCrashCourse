@@ -1,44 +1,54 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Collections.Generic; 
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class FadeRemoveBehaviour : StateMachineBehaviour
 {
-/*
-    private float timeElpsed = 0.0f;
+    [Header("Configurações de Fade")]
+
+    [Tooltip("Tempo total de fade (em segundos)")]
+    public float fadeTime = 0.5f;
+
+    [Tooltip("Tempo de espera antes de iniciar o fade (em segundos)")]
+    public float fadeDelay = 0.0f;
+
+    private float timeElapsed = 0f;
+    private float fadeDelayElapsed = 0f;
 
     SpriteRenderer spriteRenderer;
     GameObject objToRemove;
     Color startColor;
 
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    // OnStateEnter is called before OnStateEnter is called on any state inside this state machine
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timeElapsed = 0.0f;
-        SpriteRenderer = animator.GetComponent<SpriteRenderer>();
-        startColor = SpriteRenderer.color;
+        timeElapsed = 0f;
+        spriteRenderer = animator.GetComponent<SpriteRenderer>();
+        startColor = spriteRenderer.color;
         objToRemove = animator.gameObject;
     }
 
-    // OnStateUpdate is called when on each Update frame between OnStateEnter and OnStateExit callbacks
+
+    // OnStateUpdate is called before OnStateUpdate is called on any state inside this state machine
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        timeElapsed += Time.deltaTime;
-
-        float newAlpha = startColor.a * (1 - (timeElapsed / fadeTime));
-
-        spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
-
-        if (timeElapsed > fadeTime)
+        if (fadeDelay > fadeDelayElapsed)
         {
-            Destroy(objToRemove);
+            fadeDelayElapsed += Time.deltaTime;
+        }
+        else
+        {
+            timeElapsed += Time.deltaTime;
+
+            float newAlpha = startColor.a * (1 - (timeElapsed / fadeTime));
+
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, newAlpha);
+
+            if (timeElapsed > fadeTime)
+            {
+                Destroy(objToRemove);
+            }
         }
     }
-
-    // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //
-    //}
-*/
 }

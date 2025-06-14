@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit; // Evento que é chamado quando o objeto recebe dano
+    public UnityEvent damageableDeath; 
 
     Animator animator; // Referência ao Animator do objeto para controlar animações
 
@@ -70,6 +71,11 @@ public class Damageable : MonoBehaviour
             _isAlive = value;
             animator.SetBool(AnimationStrings.isAlive, value);
             Debug.Log("IsAlive: " + value);
+
+            if (value == false)
+            {
+                damageableDeath.Invoke(); // Invoca o evento de morte se o objeto não estiver mais vivo
+            }
         }
     }
 
