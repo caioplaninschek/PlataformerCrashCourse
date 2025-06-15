@@ -6,7 +6,8 @@ using UnityEngine.Events;
 public class Damageable : MonoBehaviour
 {
     public UnityEvent<int, Vector2> damageableHit; // Evento que é chamado quando o objeto recebe dano
-    public UnityEvent damageableDeath; 
+    public UnityEvent damageableDeath;
+    public UnityEvent<int, int> healthChanged; // Evento que é chamado quando a saúde do objeto muda
 
     Animator animator; // Referência ao Animator do objeto para controlar animações
 
@@ -38,6 +39,7 @@ public class Damageable : MonoBehaviour
         set
         {
             _health = value;
+            healthChanged?.Invoke(_health, _maxHealth); // Invoca o evento de mudança de saúde, passando a saúde atual e máxima
 
             // Atualiza a vida do objeto e verifica se ele deve ser destruído
             if (_health <= 0)
