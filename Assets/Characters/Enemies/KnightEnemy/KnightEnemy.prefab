@@ -354,6 +354,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  damageableDeath:
+    m_PersistentCalls:
+      m_Calls: []
   _maxHealth: 100
   _health: 100
   _isAlive: 1
@@ -615,5 +618,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3c3b3fe8509f9c4794b02048ff8c3be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 10
+  attackDamage: 25
   knockback: {x: 4, y: 1}

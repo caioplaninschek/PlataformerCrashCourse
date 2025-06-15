@@ -8,6 +8,13 @@ public class HealthPickup : MonoBehaviour
     public int healthRestore = 20; // Quantidade de vida restaurada ao coletar o item
     public UnityEngine.Vector3 spinRotationSpeed = new UnityEngine.Vector3(0, 180, 0); // Velocidade de rotação do item de coleta
 
+    AudioSource pickupSound;
+
+    void Awake()
+    {
+        pickupSound = GetComponent<AudioSource>();
+    }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -30,7 +37,15 @@ public class HealthPickup : MonoBehaviour
             bool wasHealed = damageable.Heal(healthRestore); // Tenta curar o objeto que colidiu com o item de coleta
 
             if (wasHealed)
+            {
+                if (pickupSound)
+                {
+                    AudioSource.PlayClipAtPoint(pickupSound.clip, gameObject.transform.position, pickupSound.volume);
+                }
+                
                 Destroy(gameObject); // Destroi o item de coleta após ser coletado
+            }
+                
         }
     }
 
