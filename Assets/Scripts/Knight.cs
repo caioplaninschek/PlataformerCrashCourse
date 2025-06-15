@@ -10,18 +10,6 @@ public class Knight : MonoBehaviour
 {
     [Header("Configurações do Cavaleiro")]
 
-    //-------------------------------------------------------------------------------------
-    //
-    // Versão 1 do código - Parte 1
-    // [Tooltip("Velocidade que o cavaleiro anda")]
-    // public float walkSpeed = 3.8f; // Velocidade que o cavaleiro anda
-    //
-    // [Tooltip("Taxa de desaceleração do cavaleiro ao parar")]
-    // public float walkStopRate = 0.05f; // Taxa de desaceleração do cavaleiro ao parar
-    //
-    //-------------------------------------------------------------------------------------
-    //
-    // Versão 2 do código - Parte 1
     [Tooltip("Velocidade que o cavaleiro anda")]
     public float walkAcceleration = 50f; // Velocidade que o cavaleiro anda
 
@@ -30,14 +18,15 @@ public class Knight : MonoBehaviour
 
     [Tooltip("Taxa de desaceleração do cavaleiro ao parar")]
     public float walkStopRate = 0.05f; // Taxa de desaceleração do cavaleiro ao parar
-    //
-    //-------------------------------------------------------------------------------------
+  
 
     [Tooltip("Zona de detecção de ataque do cavaleiro")]
     public DetectionZone attackZone; // Referência à zona de detecção de ataque do cavaleiro
 
     [Tooltip("Zona de detecção do chão do cavaleiro")]
     public DetectionZone cliffDetectionZone; // Referência à zona de detecção do chão do cavaleiro
+
+
 
     [Header("Referências do Cavaleiro")]
     [Tooltip("Referência ao Rigidbody2D do cavaleiro")]
@@ -137,13 +126,20 @@ public class Knight : MonoBehaviour
 
     private bool wasOnWall = false;
 
+    private float flipCooldown = 0.2f;
+    private float lastFlipTime = -1f;
+
     // FixedUpdate é chamado a uma taxa fixa, ideal para física
     private void FixedUpdate()
     {
         // Detecta transição: não estava na parede, agora está
         if (touchingDirections.IsGrounded && touchingDirections.IsOnWall && !wasOnWall)
         {
-            FlipDirection();
+            if (Time.time - lastFlipTime > flipCooldown)
+            {
+                FlipDirection();
+                lastFlipTime = Time.time;
+            }
         }
         wasOnWall = touchingDirections.IsOnWall;
 
@@ -152,7 +148,7 @@ public class Knight : MonoBehaviour
             if (CanMove && touchingDirections.IsGrounded)
             {
                 rb.linearVelocity = new Vector2(
-                    Mathf.Clamp(rb.linearVelocity.x + (walkAcceleration * walkDirectionVector.x * Time.fixedDeltaTime), -maxSpeed, maxSpeed), 
+                    Mathf.Clamp(rb.linearVelocity.x + (walkAcceleration * walkDirectionVector.x * Time.fixedDeltaTime), -maxSpeed, maxSpeed),
                     rb.linearVelocity.y);
             }
             else
